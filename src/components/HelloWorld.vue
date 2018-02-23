@@ -1,428 +1,118 @@
 <template>
     <div class="hello">
-        <data-table :data='data'></data-table>
+        <table id="example">
+        </table>
     </div>
 </template>
 <script>
-import dataTable from './common/dataTable.vue'
 export default {
     data() {
             return {
-                data: [{
-                    "Tiger Nixon",
-                    "System Architect",
-                    "Edinburgh",
-                    "5421",
-                    "2011/04/25",
-                    "$320,800"
-                }, {
-                    "Garrett Winters",
-                    "Accountant",
-                    "Tokyo",
-                    "8422",
-                    "2011/07/25",
-                    "$170,750"
-                }, {
-                    "Ashton Cox",
-                    "Junior Technical Author",
-                    "San Francisco",
-                    "1562",
-                    "2009/01/12",
-                    "$86,000"
-                }, {
-                    "Cedric Kelly",
-                    "Senior Javascript Developer",
-                    "Edinburgh",
-                    "6224",
-                    "2012/03/29",
-                    "$433,060"
-                }, {
-                    "Airi Satou",
-                    "Accountant",
-                    "Tokyo",
-                    "5407",
-                    "2008/11/28",
-                    "$162,700"
-                }, {
-                    "Brielle Williamson",
-                    "Integration Specialist",
-                    "New York",
-                    "4804",
-                    "2012/12/02",
-                    "$372,000"
-                }, {
-                    "Herrod Chandler",
-                    "Sales Assistant",
-                    "San Francisco",
-                    "9608",
-                    "2012/08/06",
-                    "$137,500"
-                }, {
-                    "Rhona Davidson",
-                    "Integration Specialist",
-                    "Tokyo",
-                    "6200",
-                    "2010/10/14",
-                    "$327,900"
-                }, {
-                    "Colleen Hurst",
-                    "Javascript Developer",
-                    "San Francisco",
-                    "2360",
-                    "2009/09/15",
-                    "$205,500"
-                }, {
-                    "Sonya Frost",
-                    "Software Engineer",
-                    "Edinburgh",
-                    "1667",
-                    "2008/12/13",
-                    "$103,600"
-                }, {
-                    "Jena Gaines",
-                    "Office Manager",
-                    "London",
-                    "3814",
-                    "2008/12/19",
-                    "$90,560"
-                }, {
-                    "Quinn Flynn",
-                    "Support Lead",
-                    "Edinburgh",
-                    "9497",
-                    "2013/03/03",
-                    "$342,000"
-                }, {
-                    "Charde Marshall",
-                    "Regional Director",
-                    "San Francisco",
-                    "6741",
-                    "2008/10/16",
-                    "$470,600"
-                }, {
-                    "Haley Kennedy",
-                    "Senior Marketing Designer",
-                    "London",
-                    "3597",
-                    "2012/12/18",
-                    "$313,500"
-                }, {
-                    "Tatyana Fitzpatrick",
-                    "Regional Director",
-                    "London",
-                    "1965",
-                    "2010/03/17",
-                    "$385,750"
-                }, {
-                    "Michael Silva",
-                    "Marketing Designer",
-                    "London",
-                    "1581",
-                    "2012/11/27",
-                    "$198,500"
-                }, {
-                    "Paul Byrd",
-                    "Chief Financial Officer (CFO)",
-                    "New York",
-                    "3059",
-                    "2010/06/09",
-                    "$725,000"
-                }, {
-                    "Gloria Little",
-                    "Systems Administrator",
-                    "New York",
-                    "1721",
-                    "2009/04/10",
-                    "$237,500"
-                }, {
-                    "Bradley Greer",
-                    "Software Engineer",
-                    "London",
-                    "2558",
-                    "2012/10/13",
-                    "$132,000"
-                }, {
-                    "Dai Rios",
-                    "Personnel Lead",
-                    "Edinburgh",
-                    "2290",
-                    "2012/09/26",
-                    "$217,500"
-                }, {
-                    "Jenette Caldwell",
-                    "Development Lead",
-                    "New York",
-                    "1937",
-                    "2011/09/03",
-                    "$345,000"
-                }, {
-                    "Yuri Berry",
-                    "Chief Marketing Officer (CMO)",
-                    "New York",
-                    "6154",
-                    "2009/06/25",
-                    "$675,000"
-                }, {
-                    "Caesar Vance",
-                    "Pre-Sales Support",
-                    "New York",
-                    "8330",
-                    "2011/12/12",
-                    "$106,450"
-                }, {
-                    "Doris Wilder",
-                    "Sales Assistant",
-                    "Sidney",
-                    "3023",
-                    "2010/09/20",
-                    "$85,600"
-                }, {
-                    "Angelica Ramos",
-                    "Chief Executive Officer (CEO)",
-                    "London",
-                    "5797",
-                    "2009/10/09",
-                    "$1,200,000"
-                }, {
-                    "Gavin Joyce",
-                    "Developer",
-                    "Edinburgh",
-                    "8822",
-                    "2010/12/22",
-                    "$92,575"
-                }, {
-                    "Jennifer Chang",
-                    "Regional Director",
-                    "Singapore",
-                    "9239",
-                    "2010/11/14",
-                    "$357,650"
-                }, {
-                    "Brenden Wagner",
-                    "Software Engineer",
-                    "San Francisco",
-                    "1314",
-                    "2011/06/07",
-                    "$206,850"
-                }, {
-                    "Fiona Green",
-                    "Chief Operating Officer (COO)",
-                    "San Francisco",
-                    "2947",
-                    "2010/03/11",
-                    "$850,000"
-                }, {
-                    "Shou Itou",
-                    "Regional Marketing",
-                    "Tokyo",
-                    "8899",
-                    "2011/08/14",
-                    "$163,000"
-                }, {
-                    "Michelle House",
-                    "Integration Specialist",
-                    "Sidney",
-                    "2769",
-                    "2011/06/02",
-                    "$95,400"
-                }, {
-                    "Suki Burks",
-                    "Developer",
-                    "London",
-                    "6832",
-                    "2009/10/22",
-                    "$114,500"
-                }, {
-                    "Prescott Bartlett",
-                    "Technical Author",
-                    "London",
-                    "3606",
-                    "2011/05/07",
-                    "$145,000"
-                }, {
-                    "Gavin Cortez",
-                    "Team Leader",
-                    "San Francisco",
-                    "2860",
-                    "2008/10/26",
-                    "$235,500"
-                }, {
-                    "Martena Mccray",
-                    "Post-Sales support",
-                    "Edinburgh",
-                    "8240",
-                    "2011/03/09",
-                    "$324,050"
-                }, {
-                    "Unity Butler",
-                    "Marketing Designer",
-                    "San Francisco",
-                    "5384",
-                    "2009/12/09",
-                    "$85,675"
-                }, {
-                    "Howard Hatfield",
-                    "Office Manager",
-                    "San Francisco",
-                    "7031",
-                    "2008/12/16",
-                    "$164,500"
-                }, {
-                    "Hope Fuentes",
-                    "Secretary",
-                    "San Francisco",
-                    "6318",
-                    "2010/02/12",
-                    "$109,850"
-                }, {
-                    "Vivian Harrell",
-                    "Financial Controller",
-                    "San Francisco",
-                    "9422",
-                    "2009/02/14",
-                    "$452,500"
-                }, {
-                    "Timothy Mooney",
-                    "Office Manager",
-                    "London",
-                    "7580",
-                    "2008/12/11",
-                    "$136,200"
-                }, {
-                    "Jackson Bradshaw",
-                    "Director",
-                    "New York",
-                    "1042",
-                    "2008/09/26",
-                    "$645,750"
-                }, {
-                    "Olivia Liang",
-                    "Support Engineer",
-                    "Singapore",
-                    "2120",
-                    "2011/02/03",
-                    "$234,500"
-                }, {
-                    "Bruno Nash",
-                    "Software Engineer",
-                    "London",
-                    "6222",
-                    "2011/05/03",
-                    "$163,500"
-                }, {
-                    "Sakura Yamamoto",
-                    "Support Engineer",
-                    "Tokyo",
-                    "9383",
-                    "2009/08/19",
-                    "$139,575"
-                }, {
-                    "Thor Walton",
-                    "Developer",
-                    "New York",
-                    "8327",
-                    "2013/08/11",
-                    "$98,540"
-                }, {
-                    "Finn Camacho",
-                    "Support Engineer",
-                    "San Francisco",
-                    "2927",
-                    "2009/07/07",
-                    "$87,500"
-                }, {
-                    "Serge Baldwin",
-                    "Data Coordinator",
-                    "Singapore",
-                    "8352",
-                    "2012/04/09",
-                    "$138,575"
-                }, {
-                    "Zenaida Frank",
-                    "Software Engineer",
-                    "New York",
-                    "7439",
-                    "2010/01/04",
-                    "$125,250"
-                }, {
-                    "Zorita Serrano",
-                    "Software Engineer",
-                    "San Francisco",
-                    "4389",
-                    "2012/06/01",
-                    "$115,000"
-                }, {
-                    "Jennifer Acosta",
-                    "Junior Javascript Developer",
-                    "Edinburgh",
-                    "3431",
-                    "2013/02/01",
-                    "$75,650"
-                }, {
-                    "Cara Stevens",
-                    "Sales Assistant",
-                    "New York",
-                    "3990",
-                    "2011/12/06",
-                    "$145,600"
-                }, {
-                    "Hermione Butler",
-                    "Regional Director",
-                    "London",
-                    "1016",
-                    "2011/03/21",
-                    "$356,250"
-                }, {
-                    "Lael Greer",
-                    "Systems Administrator",
-                    "London",
-                    "6733",
-                    "2009/02/27",
-                    "$103,500"
-                }, {
-                    "Jonas Alexander",
-                    "Developer",
-                    "San Francisco",
-                    "8196",
-                    "2010/07/14",
-                    "$86,500"
-                }, {
-                    "Shad Decker",
-                    "Regional Director",
-                    "Edinburgh",
-                    "6373",
-                    "2008/11/13",
-                    "$183,000"
-                }, {
-                    "Michael Bruce",
-                    "Javascript Developer",
-                    "Singapore",
-                    "5384",
-                    "2011/06/27",
-                    "$183,000"
-                }, {
-                    "Donna Snider",
-                    "Customer Support",
-                    "New York",
-                    "4226",
-                    "2011/01/25",
-                    "$112,000"
-                }],
-                columns: [{
-                    data: 'name'
-                }, {
-                    data: 'position'
-                }, {
-                    data: 'salary'
-                }, {
-                    data: 'office'
-                }]
+                columns: [
+                    { "title": "Engine" },
+                    { "title": "Browser" },
+                    { "title": "Platform" },
+                    { "title": "Version", "class": "center" },
+                    { "title": "Grade", "class": "center" }
+                ],
+                dataSet: [
+                    ['Trident','Internet Explorer 4.0','Win 95+','4','X'],
+                    ['Trident','Internet Explorer 5.0','Win 95+','5','C'],
+                    ['Trident','Internet Explorer 5.5','Win 95+','5.5','A'],
+                    ['Trident','Internet Explorer 6','Win 98+','6','A'],
+                    ['Trident','Internet Explorer 7','Win XP SP2+','7','A'],
+                    ['Trident','AOL browser (AOL desktop)','Win XP','6','A'],
+                    ['Gecko','Firefox 1.0','Win 98+ / OSX.2+','1.7','A'],
+                    ['Gecko','Firefox 1.5','Win 98+ / OSX.2+','1.8','A'],
+                    ['Gecko','Firefox 2.0','Win 98+ / OSX.2+','1.8','A'],
+                    ['Gecko','Firefox 3.0','Win 2k+ / OSX.3+','1.9','A'],
+                    ['Gecko','Camino 1.0','OSX.2+','1.8','A'],
+                    ['Gecko','Camino 1.5','OSX.3+','1.8','A'],
+                    ['Gecko','Netscape 7.2','Win 95+ / Mac OS 8.6-9.2','1.7','A'],
+                    ['Gecko','Netscape Browser 8','Win 98SE+','1.7','A'],
+                    ['Gecko','Netscape Navigator 9','Win 98+ / OSX.2+','1.8','A'],
+                    ['Gecko','Mozilla 1.0','Win 95+ / OSX.1+',1,'A'],
+                    ['Gecko','Mozilla 1.1','Win 95+ / OSX.1+',1.1,'A'],
+                    ['Gecko','Mozilla 1.2','Win 95+ / OSX.1+',1.2,'A'],
+                    ['Gecko','Mozilla 1.3','Win 95+ / OSX.1+',1.3,'A'],
+                    ['Gecko','Mozilla 1.4','Win 95+ / OSX.1+',1.4,'A'],
+                    ['Gecko','Mozilla 1.5','Win 95+ / OSX.1+',1.5,'A'],
+                    ['Gecko','Mozilla 1.6','Win 95+ / OSX.1+',1.6,'A'],
+                    ['Gecko','Mozilla 1.7','Win 98+ / OSX.1+',1.7,'A'],
+                    ['Gecko','Mozilla 1.8','Win 98+ / OSX.1+',1.8,'A'],
+                    ['Gecko','Seamonkey 1.1','Win 98+ / OSX.2+','1.8','A'],
+                    ['Gecko','Epiphany 2.20','Gnome','1.8','A'],
+                    ['Webkit','Safari 1.2','OSX.3','125.5','A'],
+                    ['Webkit','Safari 1.3','OSX.3','312.8','A'],
+                    ['Webkit','Safari 2.0','OSX.4+','419.3','A'],
+                    ['Webkit','Safari 3.0','OSX.4+','522.1','A'],
+                    ['Webkit','OmniWeb 5.5','OSX.4+','420','A'],
+                    ['Webkit','iPod Touch / iPhone','iPod','420.1','A'],
+                    ['Webkit','S60','S60','413','A'],
+                    ['Presto','Opera 7.0','Win 95+ / OSX.1+','-','A'],
+                    ['Presto','Opera 7.5','Win 95+ / OSX.2+','-','A'],
+                    ['Presto','Opera 8.0','Win 95+ / OSX.2+','-','A'],
+                    ['Presto','Opera 8.5','Win 95+ / OSX.2+','-','A'],
+                    ['Presto','Opera 9.0','Win 95+ / OSX.3+','-','A'],
+                    ['Presto','Opera 9.2','Win 88+ / OSX.3+','-','A'],
+                    ['Presto','Opera 9.5','Win 88+ / OSX.3+','-','A'],
+                    ['Presto','Opera for Wii','Wii','-','A'],
+                    ['Presto','Nokia N800','N800','-','A'],
+                    ['Presto','Nintendo DS browser','Nintendo DS','8.5','C/A<sup>1</sup>'],
+                    ['KHTML','Konqureror 3.1','KDE 3.1','3.1','C'],
+                    ['KHTML','Konqureror 3.3','KDE 3.3','3.3','A'],
+                    ['KHTML','Konqureror 3.5','KDE 3.5','3.5','A'],
+                    ['Tasman','Internet Explorer 4.5','Mac OS 8-9','-','X'],
+                    ['Tasman','Internet Explorer 5.1','Mac OS 7.6-9','1','C'],
+                    ['Tasman','Internet Explorer 5.2','Mac OS 8-X','1','C'],
+                    ['Misc','NetFront 3.1','Embedded devices','-','C'],
+                    ['Misc','NetFront 3.4','Embedded devices','-','A'],
+                    ['Misc','Dillo 0.8','Embedded devices','-','X'],
+                    ['Misc','Links','Text only','-','X'],
+                    ['Misc','Lynx','Text only','-','X'],
+                    ['Misc','IE Mobile','Windows Mobile 6','-','C'],
+                    ['Misc','PSP browser','PSP','-','C'],
+                    ['Other browsers','All others','-','-','U']
+                ],
+                language: {
+                    "sProcessing": "处理中...",
+                    "sLengthMenu": "显示 _MENU_ 项结果",
+                    "sZeroRecords": "没有匹配结果",
+                    "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                    "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                    "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                    "sInfoPostFix": "",
+                    "sSearch": "搜索:",
+                    "sUrl": "",
+                    "sEmptyTable": "表中数据为空",
+                    "sLoadingRecords": "载入中...",
+                    "sInfoThousands": ",",
+                    "oPaginate": {
+                        "sFirst": "首页",
+                        "sPrevious": "上页",
+                        "sNext": "下页",
+                        "sLast": "末页"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": 以升序排列此列",
+                        "sSortDescending": ": 以降序排列此列"
+                    }
+                }
             }
         },
-        components: {
-            'dataTable': dataTable,
+        mounted() {
+            this.initTable();
         },
-        mounted() {}
+        methods: {
+            initTable() {
+                var option = {
+                    data: this.dataSet,
+                    language: this.language,
+                    columns: this.columns
+                }
+                $('#example').DataTable(option);
+            },
+        }
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
