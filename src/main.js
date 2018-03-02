@@ -5,10 +5,14 @@ import App from './App'
 import router from './router'
 import dt from 'datatables.net'
 import 'datatables.net-dt/css/jquery.dataTables.css'
-import 'bootstrap/dist/css/bootstrap.css'
-Vue.config.productionTip = false
+import 'bootstrap/dist/css/bootstrap.min.css'
 
-/* eslint-disable no-new */
+
+require('./style.js')
+require('./script.js')
+    /*import dataTables from './plugins/dataTables.js'
+    Vue.use(dataTables)*/
+Vue.config.productionTip = false
 new Vue({
     el: '#app',
     router,
