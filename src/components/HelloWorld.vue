@@ -329,8 +329,11 @@ export default {
 
             /*** 删除选中的行 */
             deleteSelect() {
-
-                this.table.rows('.selected').remove().draw(false);
+                if ($('tr.selected').length > 1) {
+                    this.table.rows('.selected').remove().draw(false);
+                } else {
+                    this.table.row('.selected').remove().draw(false);
+                }
             },
 
             /*** 关闭弹窗 */
