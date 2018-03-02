@@ -182,8 +182,10 @@ export default {
                         targets: 2
                     }],
                     columns: [{
+                        data: 'DT_RowId',
+                        title: '<input type="checkbox" id="checkAll">',
                         render: function(data, type, row, meta) {
-                            return '<input type="checkbox" name="single">';
+                            return '<input type="checkbox" name="checkList">';
                         }
                     }, {
                         data: 'name',
@@ -206,11 +208,18 @@ export default {
                     }, {
                         data: 'age',
                         title: '年龄'
+                    }, {
+                        data: null,
+                        title: '操作',
+                        render: function(data, type, row, meta) {
+                            return '<a href="javascript:;" class="edit" id="' + meta.row + '">编辑</a> <a href="javascript:;" class="delete" id="' + meta.row + '">删除</a>'
+                        }
                     }],
                     initComplete: function() { //列筛选
                         var api = this.api();
+                        console.log(api.columns().indexes().flatten(), 'apiapiapiapi')
                         api.columns().indexes().flatten().each(function(i) {
-                            if (i != 0 && i > 2) { //删除第一列与第二列的筛选框
+                            if (i != 0 && i > 1 && i != 7) { //删除第一列与第二列的筛选框
                                 var column = api.column(i);
                                 var $span = $('<span class="addselect">▾</span>').appendTo($(column.header()))
                                 var select = $('<select><option value="">All</option></select>')
@@ -244,45 +253,49 @@ export default {
         mounted() {
             var that = this;
             that.table = $('#table').DataTable(this.option);
-            //checkbox全选
+
+
+            /*** checkbox全选 */
             $("#checkAll").on("click", function() {
                 if ($(this).prop("checked") === true) {
                     $("input[name='checkList']").prop("checked", $(this).prop("checked"));
-                    $('#example tbody tr').addClass('selected');
+                    $('#table tbody tr').addClass('selected');
                 } else {
                     $("input[name='checkList']").prop("checked", false);
-                    $('#example tbody tr').removeClass('selected');
+                    $('#table tbody tr').removeClass('selected');
                 }
             });
+
+
+
+            /*** 复选框操作 */
             $('#table tbody').on('click', 'tr input[name="checkList"]', function() {
                 var $tr = $(this).parents('tr');
                 $tr.toggleClass('selected');
                 var $tmp = $('[name=checkList]:checkbox');
                 $('#checkAll').prop('checked', $tmp.length == $tmp.filter(':checked').length);
-                var $tr = $(this).parents('tr');
-                $tr.toggleClass('selected');
-                var $tmp = $('[name=checkList]:checkbox');
-                $('#checkAll').prop('checked', $tmp.length == $tmp.filter(':checked').length);
             });
 
 
-            // 列显示隐藏toggle
-            $('.showcol').click(function() {
-                $('.showul').toggle();
 
-            })
+            /*** 显示弹窗 */
             $('.show-name').click(function() {
-                    var text = $(this)[0].innerHTML;
-                    console.log()
-                    that.show = true;
-                })
-                //获取表格宽度赋值给右侧弹出层
-            that.wt = $('.wt100').width();
-            $('.showslider').css('right', -that.wt);
+                var text = $(this)[0].innerHTML;
+                that.show = true;
+            })
+
+            $('.delete').click(function() {
+                var row = $(this).attr('id');
+                that.table.row($(this).parents('tr')).remove().draw(false);
+            })
 
 
+            $('.edit').click(function() {
+                that.show = true;
+            })
         },
         methods: {
+            /*** 自定义input搜索 */
             searchBtn() {
                 var that = this;
                 $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
@@ -297,9 +310,9 @@ export default {
                     }
                     return false;
                 });
-
                 this.table.draw();
             },
+
 
 
             /*** 列段显示隐藏 */
@@ -312,14 +325,15 @@ export default {
                 column.visible(!column.visible());
             },
 
+
+
             /*** 删除选中的行 */
             deleteSelect() {
-                this.table.row('.selected').remove().draw(false);
+
+                this.table.rows('.selected').remove().draw(false);
             },
 
-            clickDom() {
-                this.show = this.show ? false : true;
-            },
+            /*** 关闭弹窗 */
             closeNodal() {
                 this.show = false;
             },
