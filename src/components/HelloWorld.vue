@@ -3,33 +3,50 @@
         <table class="search-box">
             <tbody>
                 <tr>
-                    <td>输入选择范围：</td>
+					<td>所在地：</td>
+					<td>
+						<select class="select-reset" v-model="office">
+							<option value="">全部</option>
+							<option value="Tokyo">Tokyo</option>
+							<option value="London">London</option>
+							<option value="San Francisco">San Francisco</option>
+							<option value="New York">New York</option>
+							<option value="Edinburgh">Edinburgh</option>
+							<option value=""></option>
+						</select>
+					</td>
+                    <td> 年龄：</td>
                     <td>
                         <input type="text" id="min" name="min" v-model="min" />
                     </td>
+					<!--
                     <td>&nbsp;—&nbsp;</td>
                     <td>
                         <input type="text" id="max" name="max" v-model="max" />
                     </td>
+					-->
                     <td>
                         &nbsp;&nbsp;
-                        <button @click="searchBtn">查询</button>
+                        <button class="search-btn" @click="searchBtn">查询</button>
                     </td>
+					<td>
+						<!--
+						<button @click="deleteSelect">删除选中的行</button>
+						
+						<button @click="columnList"><span>列段显示/隐藏</span></button>
+						<div class="dt-button-collection" style="top: 33.3125px; left: 212px;" v-show="columnLi">
+							<button class="dt-button buttons-columnVisibility" @click="visiableChange(1)"><span>姓名</span></button>
+							<button class="dt-button buttons-columnVisibility" @click="visiableChange(2)"><span>地址</span></button>
+							<button class="dt-button buttons-columnVisibility" @click="visiableChange(3)"><span>职位</span></button>
+							<button class="dt-button buttons-columnVisibility" @click="visiableChange(4)"><span>日期</span></button>
+							<button class="dt-button buttons-columnVisibility" @click="visiableChange(5)"><span>价格</span></button>
+							<button class="dt-button buttons-columnVisibility" @click="visiableChange(6)"><span>年龄</span></button>
+						</div>
+						-->
+					</td>
                 </tr>
             </tbody>
         </table>
-        <div class="dt-buttons">
-            <button class="dt-button buttons-collection" @click="deleteSelect">删除选中的行</button>
-            <button class="dt-button buttons-collection buttons-colvis" @click="columnList"><span>列段显示/隐藏</span></button>
-            <div class="dt-button-collection" style="top: 33.3125px; left: 212px;" v-show="columnLi">
-                <button class="dt-button buttons-columnVisibility" @click="visiableChange(1)"><span>姓名</span></button>
-                <button class="dt-button buttons-columnVisibility" @click="visiableChange(2)"><span>地址</span></button>
-                <button class="dt-button buttons-columnVisibility" @click="visiableChange(3)"><span>职位</span></button>
-                <button class="dt-button buttons-columnVisibility" @click="visiableChange(4)"><span>日期</span></button>
-                <button class="dt-button buttons-columnVisibility" @click="visiableChange(5)"><span>价格</span></button>
-                <button class="dt-button buttons-columnVisibility" @click="visiableChange(6)"><span>年龄</span></button>
-            </div>
-        </div>
         <table id="table" class="table table-striped table-bordered" cellspacing="0" width="100%"></table>
         <div class="showslider" v-show="show">
             <button class="closediv" @click="closeNodal">关闭</button>
@@ -41,12 +58,13 @@ export default {
     data() {
             return {
                 show: false,
-                min: null,
-                max: null,
+                min: '',
+                max: '',
+				office: '',
                 columnLi: false,
                 option: {
                     "dom": 'Brtilp',
-                    "searching": false, //本地搜索
+                    "searching": true, //本地搜索
                     "lengthMenu": [
                         [10, 20, 30, -1],
                         [10, 20, 30, "All"]
@@ -198,7 +216,7 @@ export default {
                         title: '地址'
                     }, {
                         data: 'office',
-                        title: '职位'
+                        title: '所在地'
                     }, {
                         data: 'start_date',
                         title: '日期'
@@ -216,42 +234,51 @@ export default {
                         }
                     }],
                     initComplete: function() { //列筛选
-                        var api = this.api();
-                        console.log(api.columns().indexes().flatten(), 'apiapiapiapi')
-                        api.columns().indexes().flatten().each(function(i) {
-                            if (i != 0 && i > 1 && i != 7) { //删除第一列与第二列的筛选框
-                                var column = api.column(i);
-                                var $span = $('<span class="addselect">▾</span>').appendTo($(column.header()))
-                                var select = $('<select><option value="">All</option></select>')
-                                    .appendTo($(column.header()))
-                                    .on('click', function(evt) {
-                                        evt.stopPropagation();
-                                        var val = $.fn.dataTable.util.escapeRegex(
-                                            $(this).val()
-                                        );
-                                        column.search(val ? '^' + val + '$' : '', true, false).draw();
-                                    });
-                                column.data().unique().sort().each(function(d, j) {
-                                    function delHtmlTag(str) {
-                                        return str.replace(/<[^>]+>/g, ""); //去掉html标签
-                                    }
-
-                                    d = delHtmlTag(d)
-                                    select.append('<option value="' + d + '">' + d + '</option>')
-                                    $span.append(select)
-                                });
-
-                            }
-                        });
-
                     },
                     responsive: true,
+					buttons: [
+						'copy',
+						{
+							extend: 'excel',
+							text: '导出excel', // 按钮文案
+							className: 'red',
+							title: '复制', // 文件名
+						},
+						{
+							extend: 'pdf',
+							messageBottom: null,
+							title: '导出pdf'
+						}, {
+							extend: 'collection',
+							text: 'Table control',
+							autoClose: true, // 是否自动关闭
+							buttons: [
+								{
+									text: 'Toggle start date',
+									action: function ( e, dt, node, config ) {
+										dt.column( -2 ).visible( ! dt.column( -2 ).visible() );
+									}
+								},
+								{
+									text: 'Toggle salary',
+									action: function ( e, dt, node, config ) {
+										dt.column( -1 ).visible( ! dt.column( -1 ).visible() );
+									}
+								}
+							]
+						}, {
+							text: '删除选中的行',
+							className: 'delete-select',
+						}
+					]
                 },
-                table: null
+                table: null,
+				editor: null,
             }
         },
         mounted() {
             var that = this;
+			
             that.table = $('#table').DataTable(this.option);
 
 
@@ -281,36 +308,74 @@ export default {
             /*** 显示弹窗 */
             $('.show-name').click(function() {
                 var text = $(this)[0].innerHTML;
-                that.show = true;
+                that.show = that.show ? false : true;
             })
 
             $('.delete').click(function() {
-                var row = $(this).attr('id');
-                that.table.row($(this).parents('tr')).remove().draw(false);
+                that.table.row( $(this).parents('tr') ).remove().draw();
             })
 
 
             $('.edit').click(function() {
-                that.show = true;
+				var row = that.table.row( $(this).parents('tr') )
+				console.log($(this), '111111111111111')
+                that.show = that.show ? false : true;
             })
+			
+			
+			$('.delete-select').click(function(){
+				if ($('tr.selected').length > 1) {
+                    that.table.rows('.selected').remove().draw(false);
+                } else {
+                    that.table.row('.selected').remove().draw(false);
+                }
+			})
         },
         methods: {
             /*** 自定义input搜索 */
             searchBtn() {
                 var that = this;
-                $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
-                    var min = parseInt(that.min, 10);
-                    var max = parseInt(that.max, 10);
-                    var age = parseFloat(data[7]) || 0; // use data for the age column
-                    if ((isNaN(min) && isNaN(max)) ||
-                        (isNaN(min) && age <= max) ||
-                        (min <= age && isNaN(max)) ||
-                        (min <= age && age <= max)) {
-                        return true;
-                    }
-                    return false;
-                });
-                this.table.draw();
+				/*
+				$.fn.dataTable.ext.search.push(function( settings, data, dataIndex ) {
+					var min = parseInt( that.min, 10 );
+					var max = parseInt( that.max, 10 );
+					var age = parseFloat( data[6] ) || 0;
+					var office = data[3];
+					if(that.office && that.office === office) {
+						console.log(data, '22222222')
+						if(min || max) {
+							if ( ( isNaN( min ) && isNaN( max ) ) ||
+								 ( isNaN( min ) && age <= max ) ||
+								 ( min <= age   && isNaN( max ) ) ||
+								 ( min <= age   && age <= max ) )
+							{
+								return true;
+							}
+							return false;
+						} else {
+							return true;
+						}
+						
+					} else {
+						console.log(data, '33333333')
+						if(min || max) {
+							console.log(data, '4444444')
+							if ( ( isNaN( min ) && isNaN( max ) ) ||
+								 ( isNaN( min ) && age <= max ) ||
+								 ( min <= age   && isNaN( max ) ) ||
+								 ( min <= age   && age <= max ) )
+							{
+								console.log(111111111111)
+								return true;
+							}
+							return false;
+						} else {
+							return false;
+						}
+					}				
+				})*/
+				that.table.column(3).search(that.office).column(6).search(that.min).draw();
+				//$.fn.dataTable.ext.search.pop();//必须加上,取消tableDraw中的 push函数.就像表格已经有了,你必须把这个表格destory以后才可以
             },
 
 
@@ -385,6 +450,9 @@ div.container {
     background-color: #fff;
     border: 1px solid #ccc;
     margin: 50px auto;
+	position: absolute;
+	left: 45%;
+	top: 100px;
 }
 
 .addselect {
@@ -411,5 +479,23 @@ div.container {
     left: 0;
     top: 0;
     cursor: pointer;
+}
+
+.table.dataTable thead .sorting_asc {
+	background-image: none;
+}
+
+.select-reset {
+	padding: 3px 0;
+    width: 174px;
+	margin-right: 10px;
+}
+
+.red {
+	color: red !important;
+}
+
+.search-btn {
+	margin-right: 10px;
 }
 </style>
