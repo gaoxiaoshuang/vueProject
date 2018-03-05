@@ -1,0 +1,63 @@
+.table thead {
+    background-color: #f2f2f2;
+}
+
+.table>tbody>tr>td,
+.table>tbody>tr>th,
+.table>tfoot>tr>td,
+.table>tfoot>tr>th,
+.table>thead>tr>td,
+.table>thead>tr>th {
+    padding: 7px;
+    text-align: center;
+    font-size: 12px;
+    color: #333;
+}
+
+.table-bordered {
+    border: 1px solid #d0d0d0;
+}
+
+.table-bordered>tbody>tr>td,
+.table-bordered>tbody>tr>th,
+.table-bordered>tfoot>tr>td,
+.table-bordered>tfoot>tr>th,
+.table-bordered>thead>tr>td,
+.table-bordered>thead>tr>th {
+    border: 1px solid #ebebeb;
+    border-right: none;
+    border-top: none;
+}
+
+.table-bordered>tbody>tr>td:first-child,
+.table-bordered>tbody>tr>th:first-child,
+.table-bordered>tfoot>tr>td:first-child,
+.table-bordered>tfoot>tr>th:first-child,
+.table-bordered>thead>tr>td:first-child,
+.table-bordered>thead>tr>th:first-child {
+    border-left: none;
+}
+
+.table-bordered>tbody>tr:last-child td {
+    border-bottom: 1px solid #d0d0d0;
+}
+
+.table-bordered>thead>tr>td,
+.table-bordered>thead>tr>th {
+    border-bottom: 0px;
+    border-right: 1px solid #e3e3e3;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #fff;
+    border-right: 1px solid #efefef;
+}
+
+.table-striped>tbody>tr:nth-of-type(even) {
+    background-color: #fbfbfb;
+    border-right: 1px solid #ebebeb;
+}
+
+.dataTables_wrapper.no-footer .dataTables_scrollBody {
+    border-bottom: none;
+}

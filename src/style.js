@@ -2,3 +2,6 @@
 import './assets/DataTables/Buttons/css/buttons.dataTables.css'
 import './assets/DataTables/select/css/select.dataTables.min.css'
 import './assets/DataTables/Responsive/css/responsive.dataTables.min.css'
+import './assets/DataTables/FixedHeader/css/fixedHeader.dataTables.min.css'
+import './assets/DataTables/FixedColumns/css/fixedColumns.dataTables.min.css'
+import './assets/css/dataTables.css'
